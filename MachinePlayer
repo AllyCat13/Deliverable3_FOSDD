@@ -46,6 +46,9 @@ public class MachinePlayer extends PlayerTemplate
         System.out.printf("The enemy has gone fishing down by the river." + "\n");
         gonefishing();
     }
+    
+    
+    
  
 	//The computer remembers what cards you wanted and will ask for those to derail your progress. 
 	//If that doesn't work, plan b is to use random values. 
@@ -72,7 +75,9 @@ public class MachinePlayer extends PlayerTemplate
                 return extractedDesiredCard;//Comp knows not to ask for same card it just got as per gamme rules. 
             }      
         }
-        EnumCard result = theHand.get(StartGame.SHUFVAL.nextInt(theHand.size()));
+        
+        int zeroBasedHandSize = theHand.size();
+        EnumCard result = theHand.get(StartGame.SHUFVAL.nextInt(zeroBasedHandSize));
         return result;
     }
 }
