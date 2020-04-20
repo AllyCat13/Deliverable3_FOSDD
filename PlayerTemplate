@@ -110,13 +110,13 @@ public abstract class PlayerTemplate
     protected EnumCard verIf4Pack()
     {
         EnumCard condition = null; 
-        for(EnumCard frsLoopVal: theHand) //could be better
+        for(int i=0; i<theHand.size()-1; i++) //could be better
         {
             Integer number = new Integer(0);
             Integer four = new Integer(4);
             for(EnumCard varCheck: theHand)
             {
-              if (frsLoopVal == varCheck)
+              if (theHand.get(i) == varCheck)
               {
                   number = number + 1;
               }
@@ -125,10 +125,10 @@ public abstract class PlayerTemplate
             {
                 for(int w=0;w<four;w+=1)
                 {
-                    theHand.remove(frsLoopVal);
+                    theHand.remove(theHand.get(i));
                 }
                 fourPackNum += fourPackNum;
-                return frsLoopVal;
+                return theHand.get(i);
             }
         }
         return condition;
