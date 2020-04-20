@@ -2,6 +2,7 @@
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
+RosettaCode. Go Fish / Java. https://rosettacode.org/wiki/Go_Fish/Java
  */
 package final_bse;
 
@@ -117,7 +118,7 @@ public abstract class PlayerTemplate
             {
               if (frsLoopVal == varCheck)
               {
-                  number++;
+                  number = number + 1;
               }
             }
             if (number == four)
