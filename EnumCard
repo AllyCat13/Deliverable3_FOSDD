@@ -1,0 +1,15 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package final_bse;
+
+/**
+ *
+ * @author Aleksandar Lim
+ */
+public enum EnumCard //Wow, Java enum's are pretty useful, huh. 
+{
+    KING, QUEEN, JACK, TEN, NINE, EIGHT, SEVEN, SIX, FIVE, FOUR, THREE, TWO, ACE;
+}
