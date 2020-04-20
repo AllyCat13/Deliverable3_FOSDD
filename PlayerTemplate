@@ -112,8 +112,8 @@ public abstract class PlayerTemplate
         EnumCard condition = null; 
         for(EnumCard frsLoopVal: theHand) //could be better
         {
-            int number = 0;
-            int four = 4;
+            Integer number = new Integer(0);
+            Integer four = new Integer(4);
             for(EnumCard varCheck: theHand)
             {
               if (frsLoopVal == varCheck)
@@ -121,7 +121,7 @@ public abstract class PlayerTemplate
                   number = number + 1;
               }
             }
-            if (number == four)
+            if (number.equals(four))
             {
                 for(int w=0;w<four;w+=1)
                 {
