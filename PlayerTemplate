@@ -17,7 +17,7 @@ public abstract class PlayerTemplate
 {
     public ArrayList<EnumCard> theHand = new ArrayList<EnumCard>();//Global var for hand
     private int fourPackNum;//Global var of nuber of 4 packs
-    int handSize = 7; //gloal var of handsize
+    int handSize = 8; //gloal var of handsize
  
     public PlayerTemplate()
     {
@@ -62,9 +62,9 @@ public abstract class PlayerTemplate
     protected boolean cardInquiry(EnumCard desiredKind)
     {
         int varCheck = 0;
-       
-       
-        if (this instanceof OrganicPlayer)
+      
+        boolean isAnInstance = this instanceof OrganicPlayer;
+        if (isAnInstance)
             varCheck = 1;
         PlayerTemplate altThis = StartGame.Actors[varCheck];
  
@@ -112,15 +112,15 @@ public abstract class PlayerTemplate
     protected EnumCard verIf4Pack()
     {
         EnumCard worstCase = null; 
-        for(int j=0; j<theHand.size(); j++) //could be better
+        for(int j=0; j<theHand.size(); j+=1) //could be better
         {
             Integer number = new Integer(0);
             Integer four = new Integer(4);
-            for(int i=0; i<theHand.size()-1; i++)
+            for(int i=0; i<theHand.size(); i+=1)
             {
               if (theHand.get(j) == theHand.get(i))
               {
-                  number = number + 1;
+                  number += 1;
               }
             }
             if (number.equals(four))
