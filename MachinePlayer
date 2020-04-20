@@ -63,7 +63,8 @@ public class MachinePlayer extends PlayerTemplate
             boolean hasTheCard = theHand.contains(requests.get(l));
             if (hasTheCard)
             {
-                return requests.remove(l); //Comp knows not to ask for same card it just got as per gamme rules. 
+                EnumCard extractedDesiredCard = requests.remove(l); 
+                return extractedDesiredCard;//Comp knows not to ask for same card it just got as per gamme rules. 
             }      
         }
         EnumCard result = theHand.get(StartGame.SHUFVAL.nextInt(theHand.size()));
