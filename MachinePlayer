@@ -26,6 +26,7 @@ public class MachinePlayer extends PlayerTemplate
     {
         boolean inPlay = true;
         EnumCard empty = null;
+      
         while(inPlay){
             EnumCard fourPackC = verIf4Pack();
             if(fourPackC != empty)
@@ -40,7 +41,7 @@ public class MachinePlayer extends PlayerTemplate
             EnumCard requested = compThinking();
             System.out.printf("The enemy would like all your  " + requested + "\n");
             inPlay = cardInquiry(requested);
-            earthDays = earthDays + 1;
+            earthDays++;
         } 
         System.out.printf("The enemy has gone fishing down by the river." + "\n");
         gonefishing();
@@ -50,19 +51,21 @@ public class MachinePlayer extends PlayerTemplate
 	//If that doesn't work, plan b is to use random values. 
     protected EnumCard compThinking()
     {
+         
         int one = 1; 
         int zero = 0; 
-        int lastGuess = requests.size()-one;
+         int actualHandSize = requests.size()-one;
+       
         if (earthDays>2)
         {
             
-            requests.remove(lastGuess);
+            requests.remove(actualHandSize);
             //Needed to unset prvious entries to keep comp guesses
             earthDays=zero;                           //looking like real person guesses in a game who wants to and knows how to win.
             
         }
-        for(int l=lastGuess; l>-one; l-=1){ //I think a better approach could be used here.
-            boolean hasTheCard = theHand.contains(requests.get(one));
+        for(int El=actualHandSize; El>-one; El-=1){ //I think a better approach could be used here.
+            boolean hasTheCard = theHand.contains(requests.get(El));
             if (hasTheCard)
             {
                 EnumCard extractedDesiredCard = requests.remove(one); 
