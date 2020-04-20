@@ -1,0 +1,140 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package final_bse;
+
+import java.util.*;
+
+
+/**
+ *
+ * @author Aleksandar Lim
+ */
+public abstract class PlayerTemplate 
+{
+    public ArrayList<EnumCard> theHand = new ArrayList<EnumCard>();//Global var for hand
+    private int fourPackNum;//Global var of nuber of 4 packs
+    int handSize = 7; //gloal var of handsize
+ 
+    public PlayerTemplate()
+    {
+        for(int z=0;z<handSize;z+=1)
+        {
+            boolean settingUpHand  = true;
+            
+            if(settingUpHand)
+            {
+            gonefishing();//put card in hand per hand size requirements
+            }
+        }
+    }
+ 
+    public boolean verCardPass(EnumCard desiredKind)
+    {
+        boolean resultVal = theHand.contains(desiredKind);
+        return resultVal;
+    }
+ 
+    public LinkedList<EnumCard> passCards(EnumCard desiredKind)
+    {
+        LinkedList<EnumCard> exy = new LinkedList<>(); //Need to do some processing on cards before collecting them
+        for(int t=0;t<theHand.size();t+=1)  
+        {//
+            EnumCard condition = theHand.get(t);
+            if (condition == desiredKind)
+            {
+              
+              exy.add(condition);
+            }
+        }
+        for(int r=0;r<exy.size();r+=1)
+        {
+            theHand.remove(desiredKind);
+        }
+        LinkedList<EnumCard> result = exy;
+       
+        return result;
+    }
+ 
+    protected boolean cardInquiry(EnumCard desiredKind)
+    {
+        int varCheck = 0;
+       
+       
+        if (this instanceof OrganicPlayer)
+            varCheck = 1;
+        PlayerTemplate altThis = StartGame.Actors[varCheck];
+ 
+        //Computers card playing schema
+        if (varCheck==1)
+            ((MachinePlayer) altThis).requests.add(desiredKind);
+        //                               //
+ 
+        if (altThis.verCardPass(desiredKind))
+        {
+            for(EnumCard sea: altThis.passCards(desiredKind))
+            {
+                theHand.add(sea);
+            }
+            boolean yes = true; 
+            return yes;
+        }
+        else
+        {
+            boolean no = false;
+            return no;
+        }
+    }
+ 
+    protected void gonefishing()
+	    {
+	        if (StartGame.sizeOfDeck() > 0)
+                {
+	        	theHand.add(StartGame.takeCard());
+                }
+                
+	        else
+                {	
+                    System.out.printf("But that's impossible since the deck is empty." + "\n");
+                }
+    }
+ 
+    public int get4Pack()
+    {
+        return fourPackNum;
+    }
+ 
+    protected EnumCard verIf4Pack()
+    {
+        EnumCard condition = null; 
+        for(EnumCard frsLoopVal: theHand) //could be better
+        {
+            int number = 0;
+            int four = 4;
+            for(EnumCard varCheck: theHand)
+            {
+              if (frsLoopVal == varCheck)
+              {
+                  number++;
+              }
+            }
+            if (number == four)
+            {
+                for(int w=0;w<four;w+=1)
+                {
+                    theHand.remove(frsLoopVal);
+                }
+                fourPackNum++;
+                return frsLoopVal;
+            }
+        }
+        return condition;
+ 
+ 
+    }
+ 
+    public abstract void haveAGo();
+ 
+}
