@@ -1,6 +1,7 @@
 package final_bse; 
 
 //Java's array Linked List is very useful, huh.
+//RosettaCode. Go Fish / Java. https://rosettacode.org/wiki/Go_Fish/Java
 import java.util.LinkedList; 
 import java.util.Random;
 import java.util.Scanner;
@@ -151,7 +152,7 @@ public class StartGame
     
       public static String signIn(String promptUserName, String promptUserPassword){
       String userName = promptUserName;
-      String password = promptUserPassword;
+     
       
       
      Scanner inputObject = new Scanner(System.in);
@@ -160,7 +161,6 @@ public class StartGame
      if(!userName.equals(inputObject.next())){
      
      boolean validString = false; 
-      String inputUserName = "";
      while(!validString){
         Scanner inputObject2 = new Scanner(System.in);
          System.out.println("Enter username");
@@ -170,25 +170,12 @@ public class StartGame
              if(userName.equals(inputUserName2)){
                 validString = true;
              }
-             else
-             {
-                while(!doesEqual){
-                    Scanner inputObject3 = new Scanner(System.in);
-                    System.out.println("Enter user name");
-                    if(inputObject3.hasNext()){
-                        String inputUserName3 = inputObject3.next();
-                        if(userName.equals(inputUserName3)){
-                            doesEqual = true;
-                            validString = true;
-                        }
-                        
-                    }
-                }
-             }
+           
          }
      }
       
      }//End validating username and password to enter game
+      String password = promptUserPassword;
       Scanner inputObject4 = new Scanner(System.in);
      System.out.println("Enter password");
      
@@ -199,29 +186,16 @@ public class StartGame
         Scanner inputObject5 = new Scanner(System.in);
          System.out.println("Enter password");
          if(inputObject5.hasNext()){
-             boolean doesEqual2 = false;
+            
              String inputPassword2 = inputObject5.next();
              if(password.equals(inputPassword2)){
                 validString2 = true;
              }
-             else
-             {
-                while(!doesEqual2){
-                    Scanner inputObject6 = new Scanner(System.in);
-                    System.out.println("Enter password");
-                    if(inputObject6.hasNext()){
-                        String inputPassword3 = inputObject6.next();
-                        if(password.equals(inputPassword3)){
-                            doesEqual2 = true;
-                            validString2 = true;
-                        }
-                        
-                    }
-                }
+             
              }
          }
      }
-     }//End of validating password entry 
+     //End of validating password entry 
      return userName;
      }
 }
