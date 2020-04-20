@@ -41,7 +41,7 @@ public class MachinePlayer extends PlayerTemplate
             EnumCard requested = compThinking();
             System.out.printf("The enemy would like all your  " + requested + "\n");
             inPlay = cardInquiry(requested);
-            earthDays = earthDays = 1;
+            earthDays = earthDays + 1;
         } 
         System.out.printf("The enemy has gone fishing down by the river." + "\n");
         gonefishing();
