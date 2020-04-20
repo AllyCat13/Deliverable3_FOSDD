@@ -195,14 +195,14 @@ public class StartGame
              }
              
              
-             }
+             }//end check if string 
        
-         }
-     }
+         }//End while loop
+     }//End first check
      //End of validating password entry 
      return userName;
-     }
-}
+     }//End sign in method
+}//End Star game class
 
 class OrganicPlayer extends PlayerTemplate
 {
