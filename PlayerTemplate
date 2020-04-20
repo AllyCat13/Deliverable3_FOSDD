@@ -91,7 +91,9 @@ public abstract class PlayerTemplate
  
     protected void gonefishing()
 	    {
-	        if (StartGame.sizeOfDeck() > 0)
+                boolean deckExists = StartGame.sizeOfDeck() > 0;
+                
+	        if (deckExists)
                 {
 	        	theHand.add(StartGame.takeCard());
                 }
