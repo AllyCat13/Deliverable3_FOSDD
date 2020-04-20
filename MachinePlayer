@@ -25,10 +25,10 @@ public class MachinePlayer extends PlayerTemplate
     public void haveAGo()
     {
         boolean inPlay = true;
-        EnumCard testNull = null;
+        EnumCard empty = null;
         while(inPlay){
             EnumCard fourPackC = verIf4Pack();
-            if(fourPackC != testNull)
+            if(fourPackC != empty)
             {
                 System.out.printf("Alert, The enemy got a 4-pack of " + fourPackC + "s..." + "\n");
             }
