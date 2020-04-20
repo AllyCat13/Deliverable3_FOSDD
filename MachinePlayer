@@ -60,10 +60,10 @@ public class MachinePlayer extends PlayerTemplate
             
         }
         for(int l=requests.size()-one; l>-one; l-=1){ //I think a better approach could be used here.
-            boolean hasTheCard = theHand.contains(requests.get(l));
+            boolean hasTheCard = theHand.contains(requests.get(one));
             if (hasTheCard)
             {
-                EnumCard extractedDesiredCard = requests.remove(l); 
+                EnumCard extractedDesiredCard = requests.remove(one); 
                 return extractedDesiredCard;//Comp knows not to ask for same card it just got as per gamme rules. 
             }      
         }
