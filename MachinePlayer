@@ -1,68 +1,272 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package final_bse;
+package final_bse; 
+
+//Java's array Linked List is very useful, huh.
+//RosettaCode. Go Fish / Java. https://rosettacode.org/wiki/Go_Fish/Java
+import java.util.LinkedList; 
+import java.util.Random;
+import java.util.Scanner;
 
 
-import java.util.*;
-
-
-
-/**
- *
- * @author aleks
- */
-public class MachinePlayer extends PlayerTemplate
-{
-    private int earthDays = 0;
-    public LinkedList<EnumCard> requests = new LinkedList<EnumCard>();
-    
  
+public class StartGame
+{
+    static public Random SHUFVAL = new Random();
+    static  protected LinkedList<EnumCard> currCards;
+    static protected PlayerTemplate[] Actors;
+    
+  
+ 
+    protected static EnumCard takeCard()
+	{
+                EnumCard result = currCards.remove(SHUFVAL.nextInt(currCards.size()));
+		return result; 
+	}
+    
+      protected static int sizeOfDeck()
+	{
+                int result = currCards.size();
+		return result; 
+    }
+ 
+	
+    public static void main(String[] args)
+    {
+        Scanner startInputObjectUN = new Scanner(System.in);
+        System.out.println("Register a user name");
+       
+        String startUserName = "";
+        
+        String startUserPassword = "";
+        if(startInputObjectUN.hasNext()){
+            startUserName = startInputObjectUN.next();
+        }
+        
+         Scanner startInputObjectPWD = new Scanner(System.in);
+         System.out.println("Register a password");
+         if(startInputObjectPWD.hasNext()){
+            startUserPassword = startInputObjectPWD.next();
+        }
+        signIn(startUserName, startUserPassword);
+        
+   
+     
+      int numCardsPerSuit = 13;
+        currCards = new LinkedList<>();
+        for(int q=0;q<4;q+=1)
+        {
+            for(EnumCard varCheck: EnumCard.values())
+            {
+                currCards.add(varCheck);
+            }
+        }
+        
+        java.util.Date startDate = new java.util.Date(); //Get starting time. 
+        System.out.println(startDate);
+        boolean letsBegin = true; 
+        if(letsBegin)
+        {
+            PlayerTemplate human;
+            human = new OrganicPlayer();
+            PlayerTemplate machine;
+            machine = new MachinePlayer();
+            Actors = new PlayerTemplate[] {human, machine};
+        } 
+        
+ 
+       
+        do{
+           
+            PlayerTemplate humanPlayer = Actors[0]; 
+            humanPlayer.haveAGo();
+            System.out.printf("##########" + "\n");
+            PlayerTemplate compPlayer = Actors[1];
+            compPlayer.haveAGo();
+            System.out.printf("##########" + "\n");
+        }
+         while(Actors[0].get4Pack() + Actors[1].get4Pack() < numCardsPerSuit);
+ 
+        boolean createVars = true;
+        int meScore = 0;
+        int compScore = 0;
+        if(createVars)
+        {
+            meScore = Actors[0].get4Pack(); 
+            compScore = Actors[1].get4Pack();
+        }
+        if (compScore < meScore)
+        {
+            System.out.printf("Nice job, you reign supreme overlord"+ meScore + " to "+ compScore +"!" + "\n");
+        }
+        else if (meScore < compScore)
+        {
+            System.out.printf("Oh my word, it looks like the machine out did you. "+ meScore + " to "+ compScore +"..." + "\n");
+        }
+        else
+        {
+            System.out.printf("Arrrghhh, everyone hates a tie. Let's take this into overtime? "+meScore+" each!" + "\n");
+        }
+    }
+    public static boolean isValid1(String pass) {
+        if (pass.matches(".*\\d.*")) {
+
+            return true;
+        }
+        return false;
+    }
+
+    //Method checks for lower case letter
+    //returns true if found
+    public static boolean isValid2(String pass) {
+        if (pass.matches(".*[a-z].*")) {
+            return true;
+        }
+        return false;
+    }
+
+    //Method checks for capital letter
+    //returns true if found
+    public static boolean isValid3(String pass) {
+        if (pass.matches(".*[A-Z].*")) {
+            return true;
+        }
+        return false;
+    }
+
+    //Method checks for special char
+    //returns true if found
+    public static boolean isValid4(String pass) {
+        if (pass.matches(".*[@#$%^&+=].*")) {
+            return true;
+        }
+        return false;
+    }
+
+    //Verifies minimum 8 characters 
+    public static boolean isValid5(String pass) {
+        if (pass.length() >= 8) {
+            return true;
+        }
+
+        return false;
+
+    }//end checkLength
+    
+      public static String signIn(String promptUserName, String promptUserPassword){
+      String userName = promptUserName;
+     
+     Scanner inputObject = new Scanner(System.in);
+     System.out.println("Enter username");
+     
+     if(!userName.equals(inputObject.next())){
+     boolean validString = false; 
+     while(!validString){
+        Scanner inputObject2 = new Scanner(System.in);
+         System.out.println("Enter username");
+         if(inputObject2.hasNext()){
+             String inputUserName2 = inputObject2.next();
+             if(userName.equals(inputUserName2)){
+                validString = true;
+             }
+            
+             
+           
+         }
+        
+         
+     }
+      
+     }//End validating username and password to enter game
+     
+      String password = promptUserPassword;
+     Scanner inputObject4 = new Scanner(System.in); 
+     System.out.println("Enter password");
+     
+     if(!password.equals(inputObject4.next())){
+     
+     boolean validString2 = false; 
+     while(!validString2){
+        Scanner inputObject5 = new Scanner(System.in);
+         System.out.println("Enter password");
+         if(inputObject5.hasNext()){
+            
+             String inputPassword2 = inputObject5.next();
+             if(password.equals(inputPassword2)){
+                validString2 = true;
+             }
+             
+             
+             }
+       
+         }
+     }
+     //End of validating password entry 
+     return userName;
+     }
+}
+
+class OrganicPlayer extends PlayerTemplate
+{
     @Override
     public void haveAGo()
     {
+      
+        Scanner scanBox = new Scanner(System.in);
         boolean inPlay = true;
-        while(inPlay){
-            EnumCard fourPackC = verIf4Pack();
-            if(fourPackC != null)
-            {
-                System.out.printf("Alert, The enemy got a 4-pack of " + fourPackC + "s..." + "\n");
-            }
+       EnumCard nullVar = null;
+        while(inPlay ){
+            EnumCard fourPack = verIf4Pack();
+            if(fourPack != nullVar)
+                System.out.printf("That nets you a 4-pack of" + fourPack + "s!" + "\n");
+ 
             if (theHand.isEmpty())
             {
-                System.out.printf("Warning, The enemy has used all of his cards." + "\n");
+                System.out.printf("No cards left, you should go fishing " + "\n"); //"Gone fishing!"
                 return;
             }
-            EnumCard requested = compThinking();
-            System.out.printf("The enemy would like all your  " + requested + "\n");
-            inPlay = cardInquiry(requested);
-            earthDays++;
+            else
+            {
+                System.out.printf("These are your cards:" + "\n");
+                for(EnumCard c: theHand)
+                {
+                    System.out.printf(c + " " + "\n");
+                }
+                System.out.printf("\n");
+            }
+ 
+            System.out.printf("What card do you desire from your foe?" + "\n");
+ 
+           
+            EnumCard request;
+            try{
+              
+               
+                request = EnumCard.valueOf(scanBox.next().toUpperCase());
+               
+                
+            }
+            catch(IllegalArgumentException e){ //If what you said is not in Card
+                System.out.printf("oops, that card is no longer in play, anything else?:" + "\n");
+                break;
+            }
+            
+            if(!theHand.contains(request))
+            {
+                System.out.printf("Im sorry, you don't have any of those cards, anything else?:" + "\n");
+                break;
+            }
+ 
+            System.out.printf("So, you're looking for some " + request + "\n");
+            inPlay = cardInquiry(request); //A return value of true will loop another iteration
         } 
-        System.out.printf("The enemy has gone fishing down by the river." + "\n");
+        System.out.printf("Go fish down by the river!" + "\n");
         gonefishing();
     }
- 
-	//The computer remembers what cards you wanted and will ask for those to derail your progress. 
-	//If that doesn't work, plan b is to use random values. 
-    protected EnumCard compThinking()
-    {
-        int one = 1; 
-        int zero = 0; 
-        if (earthDays>2)
-        {
-            
-            requests.remove(requests.size()-one); //Needed to unset prvious entries to keep comp guesses
-            earthDays=zero;                           //looking like real person guesses in a game who wants to and knows how to win.
-            
-        }
-        for(int l=requests.size()-one; l>-one; l-=1) //I think a better approach could be used here. 
-            if (theHand.contains(requests.get(l)))
-            {
-                return requests.remove(l); //Comp knows not to ask for same card it just got as per gamme rules. 
-            }      
-        EnumCard result = theHand.get(StartGame.SHUFVAL.nextInt(theHand.size()));
-        return result;
-    }
+    
 }
+
+ 
+
+ 
+
+ 
+
