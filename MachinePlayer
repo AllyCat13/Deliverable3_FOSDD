@@ -59,11 +59,13 @@ public class MachinePlayer extends PlayerTemplate
             earthDays=zero;                           //looking like real person guesses in a game who wants to and knows how to win.
             
         }
-        for(int l=requests.size()-one; l>-one; l-=1) //I think a better approach could be used here. 
-            if (theHand.contains(requests.get(l)))
+        for(int l=requests.size()-one; l>-one; l-=1){ //I think a better approach could be used here.
+            boolean hasTheCard = theHand.contains(requests.get(l));
+            if (hasTheCard)
             {
                 return requests.remove(l); //Comp knows not to ask for same card it just got as per gamme rules. 
             }      
+        }
         EnumCard result = theHand.get(StartGame.SHUFVAL.nextInt(theHand.size()));
         return result;
     }
