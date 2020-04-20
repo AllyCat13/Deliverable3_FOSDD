@@ -109,7 +109,7 @@ public abstract class PlayerTemplate
  
     protected EnumCard verIf4Pack()
     {
-        EnumCard condition = null; 
+        EnumCard worstCase = null; 
         for(int j=0; j<theHand.size(); j++) //could be better
         {
             Integer number = new Integer(0);
@@ -131,7 +131,7 @@ public abstract class PlayerTemplate
                 return theHand.get(j);
             }
         }
-        return condition;
+        return worstCase;
  
  
     }
