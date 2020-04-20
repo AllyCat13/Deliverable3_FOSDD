@@ -52,14 +52,16 @@ public class MachinePlayer extends PlayerTemplate
     {
         int one = 1; 
         int zero = 0; 
+        int lastGuess = requests.size()-one;
         if (earthDays>2)
         {
             
-            requests.remove(requests.size()-one); //Needed to unset prvious entries to keep comp guesses
+            requests.remove(lastGuess);
+            //Needed to unset prvious entries to keep comp guesses
             earthDays=zero;                           //looking like real person guesses in a game who wants to and knows how to win.
             
         }
-        for(int l=requests.size()-one; l>-one; l-=1){ //I think a better approach could be used here.
+        for(int l=lastGuess; l>-one; l-=1){ //I think a better approach could be used here.
             boolean hasTheCard = theHand.contains(requests.get(one));
             if (hasTheCard)
             {
