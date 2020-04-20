@@ -63,12 +63,13 @@ public class StartGame
         java.util.Date startDate = new java.util.Date(); //Get starting time. 
         System.out.println(startDate);
         boolean letsBegin = true; 
-        if(letsBegin){
-        PlayerTemplate human;
-        human = new OrganicPlayer();
-        PlayerTemplate machine;
-        machine = new MachinePlayer();
-        Actors = new PlayerTemplate[] {human, machine};
+        if(letsBegin)
+        {
+            PlayerTemplate human;
+            human = new OrganicPlayer();
+            PlayerTemplate machine;
+            machine = new MachinePlayer();
+            Actors = new PlayerTemplate[] {human, machine};
         } 
         
  
@@ -153,33 +154,34 @@ public class StartGame
       public static String signIn(String promptUserName, String promptUserPassword){
       String userName = promptUserName;
      
-      
-      
      Scanner inputObject = new Scanner(System.in);
      System.out.println("Enter username");
      
      if(!userName.equals(inputObject.next())){
-     
      boolean validString = false; 
      while(!validString){
         Scanner inputObject2 = new Scanner(System.in);
          System.out.println("Enter username");
          if(inputObject2.hasNext()){
-             boolean doesEqual = false;
              String inputUserName2 = inputObject2.next();
              if(userName.equals(inputUserName2)){
                 validString = true;
              }
+            
+             
            
          }
+        
+         
      }
       
      }//End validating username and password to enter game
+     
       String password = promptUserPassword;
-      Scanner inputObject4 = new Scanner(System.in);
+     Scanner inputObject4 = new Scanner(System.in); 
      System.out.println("Enter password");
      
-     if(!userName.equals(inputObject4.next())){
+     if(!password.equals(inputObject4.next())){
      
      boolean validString2 = false; 
      while(!validString2){
@@ -192,7 +194,9 @@ public class StartGame
                 validString2 = true;
              }
              
+             
              }
+       
          }
      }
      //End of validating password entry 
